@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+   db2:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: mysql
+        MYSQL_DATABASE: wordpress
+        MYSQL_USER: mysql
+        MYSQL_PASSWORD: mysql
+    networks:
+       - wpsite
+    
+   phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+        PMA_HOST: db2
+        MYSQL_ROOT_PASSWORD: "123"
+    ports:
+       - "88:80"
+    depends_on:
+       - db2
+    networks:
+      - wpsite
+
+   wordpress:
+    image: wordpress
+    restart: always
+    ports:
+       - "80:80"
+    environment:
+        WORDPRESS_DB_HOST: db2
+        WORDPRESS_DB_USER: mysql
+        WORDPRESS_DB_PASSWORD: mysql
+        WORDPRESS_DB_NAME: wordpress
+    depends_on:
+       - db2
+    networks:
+       - wpsite
+
+networks:
+   wpsite:
+volumes:
+   db_data:
