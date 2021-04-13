@@ -1,9 +1,9 @@
 # docker-compose-wordpress-phpmyadmin
-*Start:
+## Start:
 
 docker-compose up -d
 
-Access on:
+## Access on:
 
 localhost:80 for WP
 
