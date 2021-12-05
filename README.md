@@ -25,6 +25,7 @@ Sometimes, All content on WP will be broken. It is cause,
 Wordpress must be forward manually to consume https connection to load all static file.
 No worry, you can define it manually with add some script on wp-config (inside wp container) :
 
+define('FORCE_SSL_ADMIN', true);
 if (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
 	$_SERVER['HTTPS'] = 'on';
 }
